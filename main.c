@@ -42,6 +42,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#define LEDPORT PORTC //output - 7 segments LED, bits 0-6
+#define LEDDDR DDRC //direction (input or output)
+
 #define SEG_A (1<<0) //segment a as LSB of PORTC
 #define SEG_B (1<<1)
 #define SEG_C (1<<2)
@@ -50,9 +53,11 @@
 #define SEG_F (1<<5)
 #define SEG_G (1<<6)
 
+void showOnLEDSegments(uint8_t val);
+
 int main(void)
 {
-	uint8_t digits[10] = {
+	static uint8_t DIGITS[10] = {
 			~(SEG_A|SEG_B|SEG_C|SEG_D|SEG_E|SEG_F), 		//0
 			~(SEG_B|SEG_C), 								//1
 			~(SEG_A|SEG_B|SEG_G|SEG_C|SEG_D), 				//2
@@ -65,5 +70,25 @@ int main(void)
 			~(SEG_A|SEG_B|SEG_C|SEG_D|SEG_F|SEG_G), 		//9
 	};
 
-	PORTC = 0xFF; //set PORTC as output - leds
+	LEDDDR = 0xFF; //all pins of that port as output
+	uint8_t toDisplay = 0;
+
+	while (1)
+	{
+		showOnLEDSegments(toDisplay);
+		toDisplay = (toDisplay + 1) % 10;
+		_delay_ms(500);
+	}
+
+
+	void showOnLEDSegments(uint8_t val)
+	{
+		if (val < 10)
+		{
+			LEDPORT = DIGITS[val];
+		} else
+		{
+			LEDPORT = 0xFF; //blank leds
+		}
+	}
 }
