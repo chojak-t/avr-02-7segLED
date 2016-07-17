@@ -53,16 +53,16 @@
 int main(void)
 {
 	uint8_t digits[10] = {
-			(SEG_A|SEG_B|SEG_C|SEG_D|SEG_E|SEG_F), //0
-			(SEG_B|SEG_C), //1
-			(SEG_A|SEG_B|SEG_G|SEG_C|SEG_D), //2
-			(SEG_A|SEG_B|SEG_G|SEG_C|SEG_D), //3
-			(SEG_F|SEG_G|SEG_B|SEG_C), //4
-			(SEG_A|SEG_F|SEG_G|SEG_C|SEG_D), //5
-			(SEG_A|SEG_F|SEG_E|SEG_D|SEG_C|SEG_G), //6
-			(SEG_A|SEG_B|SEG_C|SEG_F), //7
-			(SEG_A|SEG_B|SEG_C|SEG_D|SEG_E|SEG_F|SEG_G), //8
-			(SEG_A|SEG_B|SEG_C|SEG_D|SEG_F|SEG_G), //9
+			~(SEG_A|SEG_B|SEG_C|SEG_D|SEG_E|SEG_F), 		//0
+			~(SEG_B|SEG_C), 								//1
+			~(SEG_A|SEG_B|SEG_G|SEG_C|SEG_D), 				//2
+			~(SEG_A|SEG_B|SEG_G|SEG_C|SEG_D), 				//3
+			~(SEG_F|SEG_G|SEG_B|SEG_C), 					//4
+			~(SEG_A|SEG_F|SEG_G|SEG_C|SEG_D), 				//5
+			~(SEG_A|SEG_F|SEG_E|SEG_D|SEG_C|SEG_G), 		//6
+			~(SEG_A|SEG_B|SEG_C|SEG_F), 					//7
+			~(SEG_A|SEG_B|SEG_C|SEG_D|SEG_E|SEG_F|SEG_G), 	//8
+			~(SEG_A|SEG_B|SEG_C|SEG_D|SEG_F|SEG_G), 		//9
 	};
 
 	PORTC = 0xFF; //set PORTC as output - leds
