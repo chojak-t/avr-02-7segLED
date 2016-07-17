@@ -42,15 +42,15 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define SEG_A (1<<0)
-#define SEG_B (1<<0)
-#define SEG_C (1<<0)
-#define SEG_D (1<<0)
-#define SEG_E (1<<0)
-#define SEG_F (1<<0)
-#define SEG_G (1<<0)
+#define SEG_A (1<<0) //segment a as LSB of PORTC
+#define SEG_B (1<<1)
+#define SEG_C (1<<2)
+#define SEG_D (1<<3)
+#define SEG_E (1<<4)
+#define SEG_F (1<<5)
+#define SEG_G (1<<6)
 
 int main(void)
 {
-	PORTC = 0xFF; //PORTC as output - leds
+	PORTC = 0xFF; //set PORTC as output - leds
 }
