@@ -87,7 +87,8 @@ int main(void)
 	LEDDDR = 0xFF; //all pins of that port as output
 	ANODEDIR |= CA1 | CA2 | CA3 | CA4; //bit 0,1,2 and 3 port D as output (anodes)
 	ANODEPORT |= CA1 | CA2 | CA3 | CA4; //turn off anodes
-	uint8_t toDisplay = 0;
+	uint16_t toDisplay = 0;
+	uint8_t forward = 1;
 
 	//set timer0
 	TCCR0A |= (1<<WGM01); //CTC timer mode
@@ -100,14 +101,30 @@ int main(void)
 	sei(); //global innteruptions on
 	while (1)
 	{
-		toDisplay = (toDisplay + 1) % 10000;
+		if (toDisplay == 9999)
+		{
+			forward = 0;
+		}
+		else if (toDisplay == 0)
+		{
+			forward = 1;
+		}
+
+		if (forward == 1)
+		{
+			toDisplay = (toDisplay + 1) % 10000;
+		}
+		else
+		{
+			toDisplay = (toDisplay - 1) % 10000;
+		}
 
 		//here we are dissasembling whole number to single digiths
 		toDisplay_1000 = toDisplay / 1000;
 		toDisplay_100 = (toDisplay % 1000)/100;
 		toDisplay_10 = (toDisplay % 100)/10;
 		toDisplay_1 = (toDisplay % 10);
-		_delay_ms(800);
+		_delay_ms(65);
 	}
 }
 
