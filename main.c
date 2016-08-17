@@ -86,9 +86,8 @@ int main(void)
 {
 	LEDDDR = 0xFF; //all pins of that port as output
 	ANODEDIR |= CA1 | CA2 | CA3 | CA4; //bit 0,1,2 and 3 port D as output (anodes)
-	ANODEPORT &= ~(CA1 | CA2 | CA3 | CA4); //turn off anodes
+	ANODEPORT |= CA1 | CA2 | CA3 | CA4; //turn off anodes
 	uint8_t toDisplay = 0;
-
 
 	//set timer0
 	TCCR0A |= (1<<WGM01); //CTC timer mode
@@ -120,6 +119,7 @@ void showOnLEDSegments(uint8_t val)
 ISR(TIMER0_COMPA_vect)
 {
 	static uint8_t tmp = 1;
+
 	ANODEPORT = ~tmp;
 
 	if(tmp == 1)

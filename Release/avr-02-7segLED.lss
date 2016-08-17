@@ -89,7 +89,7 @@ Disassembly of section .text:
   ac:	8f 60       	ori	r24, 0x0F	; 15
   ae:	8a b9       	out	0x0a, r24	; 10
   b0:	8b b1       	in	r24, 0x0b	; 11
-  b2:	80 7f       	andi	r24, 0xF0	; 240
+  b2:	8f 60       	ori	r24, 0x0F	; 15
   b4:	8b b9       	out	0x0b, r24	; 11
   b6:	84 b5       	in	r24, 0x24	; 36
   b8:	82 60       	ori	r24, 0x02	; 2
